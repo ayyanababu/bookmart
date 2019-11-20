@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import AppReducers from "../RootReducer";
 import allSagas from "../RootSaga";
+import logger from "redux-logger";
 
 const storeMiddleWares = [];
 
@@ -9,6 +10,7 @@ const configureStore = () => {
   // Saga MiddleWare
   const sagaMiddleware = createSagaMiddleware();
 
+  storeMiddleWares.push(logger);
   storeMiddleWares.push(sagaMiddleware);
 
   // Apply all middleWares to Redux Store

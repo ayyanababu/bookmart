@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import actions from "../redux/bookmart/actions";
+import SearchField from "../components/SearchField";
+
+import "./Books.css";
 
 const { updateBook } = actions;
 
@@ -11,8 +14,18 @@ class Books extends Component {
     updateBook();
   }
 
+  handleSearch = query => {
+    console.log("** query **", query);
+  };
+
   render() {
-    return <div>Books page</div>;
+    return (
+      <div className="container">
+        <div className="booksTitle">Book Mart</div>
+        <SearchField onClickOfSearch={this.handleSearch} />
+        <div className="divider" />
+      </div>
+    );
   }
 }
 

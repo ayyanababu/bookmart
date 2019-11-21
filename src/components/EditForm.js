@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "../hooks/useForm";
 import { strings } from "../constants/Messages";
+import { generateID } from "../Utils/Utils";
 import "./EditForm.css";
 
 export default function EditForm(props) {
@@ -10,7 +11,15 @@ export default function EditForm(props) {
   const { title, description, author } = values;
 
   const handleSubmit = () => {
-    onSubmit(values);
+    let bookValues = values;
+    if (!isEdit) {
+      // then this is creating a new book i.e on Add
+      bookValues = {
+        ...values,
+        id: generateID()
+      };
+    }
+    onSubmit(bookValues, isEdit);
   };
 
   let buttonTitle = strings.add;

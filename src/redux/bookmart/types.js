@@ -4,6 +4,7 @@ const UPDATE_FILTERED_BOOKS = "bookMart/update/search/books";
 const GET_BOOKS_lIST_REQUEST = "bookMart/get/booklist/request";
 const GET_BOOKS_lIST_SUCCESS = "bookMart/get/booklist/success";
 const SEARCH_QUERY = "bookMat/searchQuery";
+const REQ_UPDATE_BOOK = "bookMart/requpdatebook";
 
 export default {
   UPDATE_BOOK,
@@ -11,5 +12,6 @@ export default {
   UPDATE_FILTERED_BOOKS,
   GET_BOOKS_lIST_REQUEST,
   GET_BOOKS_lIST_SUCCESS,
-  SEARCH_QUERY
+  SEARCH_QUERY,
+  REQ_UPDATE_BOOK
 };

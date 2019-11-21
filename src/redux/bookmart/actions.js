@@ -6,8 +6,14 @@ const {
   UPDATE_FILTERED_BOOKS,
   GET_BOOKS_lIST_SUCCESS,
   GET_BOOKS_lIST_REQUEST,
-  SEARCH_QUERY
+  SEARCH_QUERY,
+  REQ_UPDATE_BOOK
 } = types;
+
+const reqUpdateBook = data => ({
+  type: REQ_UPDATE_BOOK,
+  payload: data
+});
 
 const setSearchQuery = data => ({
   type: SEARCH_QUERY,
@@ -44,5 +50,6 @@ export default {
   updateSearchBooks,
   getBooks,
   getBooksSuccess,
-  setSearchQuery
+  setSearchQuery,
+  reqUpdateBook
 };

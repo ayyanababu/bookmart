@@ -19,7 +19,7 @@ const goalReducer = (state = initialState, action) => {
     case UPDATE_BOOK:
       return {
         ...state,
-        books: [...state.books, payload]
+        books: payload
       };
     case UPDATE_FILTERED_BOOKS:
       return {

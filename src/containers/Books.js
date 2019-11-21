@@ -9,7 +9,7 @@ import Modal from "react-responsive-modal";
 import Form from "../components/EditForm";
 import "./Books.css";
 
-const { getBooks, searchBook } = actions;
+const { getBooks, searchBook, reqUpdateBook } = actions;
 
 class Books extends Component {
   state = {
@@ -64,8 +64,11 @@ class Books extends Component {
     });
   };
 
-  onSubmit = values => {
-    console.log("**** form values ****", values);
+  onSubmit = (values, isEdit) => {
+    const { updateBook } = this.props;
+    const type = isEdit ? "edit" : "add";
+    updateBook(values, type);
+    this.toggleModel();
   };
 
   render() {
@@ -104,6 +107,9 @@ const mapDispatchToProps = dispatch => ({
   },
   searchBookByQuery: query => {
     dispatch(searchBook(query));
+  },
+  updateBook: (book, type) => {
+    dispatch(reqUpdateBook({ book, type }));
   }
 });
 
@@ -112,7 +118,8 @@ Books.propTypes = {
   searchBookByQuery: PropTypes.func,
   filteredBooks: PropTypes.array,
   books: PropTypes.array,
-  searchString: PropTypes.string
+  searchString: PropTypes.string,
+  updateBook: PropTypes.func
 };
 
 Books.defaultProps = {
@@ -120,7 +127,8 @@ Books.defaultProps = {
   searchBookByQuery: () => {},
   books: [],
   filteredBooks: [],
-  searchString: ""
+  searchString: "",
+  updateBook: () => {}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Books);

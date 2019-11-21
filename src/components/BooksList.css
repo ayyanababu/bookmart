@@ -1,0 +1,82 @@
+.bookslist-container {
+  display: flex;
+  max-width: calc(100vw - 30%);
+  background-color: #fff;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+  padding: 20px 16px;
+  margin: 8px 16px;
+  border-radius: 4px;
+  flex-direction: column;
+}
+
+.bookslist-top-container {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0px;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookslist-title {
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.bookslist-description-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.bookslist-description-text {
+  color: black;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.bookslist-authors {
+  color: lightgray;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.bookslist-bottom-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  justify-content: space-between;
+}
+
+.bookslist-rating {
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+}
+
+.ratingcount {
+  color: #48689a;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.image {
+  width: 22px;
+  height: 22px;
+}
+
+.onHover:hover {
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  align-self: center;
+  margin: 25px 0px;
+}

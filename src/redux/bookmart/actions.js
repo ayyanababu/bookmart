@@ -5,8 +5,14 @@ const {
   SEARCH_BOOK,
   UPDATE_FILTERED_BOOKS,
   GET_BOOKS_lIST_SUCCESS,
-  GET_BOOKS_lIST_REQUEST
+  GET_BOOKS_lIST_REQUEST,
+  SEARCH_QUERY
 } = types;
+
+const setSearchQuery = data => ({
+  type: SEARCH_QUERY,
+  payload: data
+});
 
 const updateBook = bookData => ({
   type: UPDATE_BOOK,
@@ -37,5 +43,6 @@ export default {
   searchBook,
   updateSearchBooks,
   getBooks,
-  getBooksSuccess
+  getBooksSuccess,
+  setSearchQuery
 };

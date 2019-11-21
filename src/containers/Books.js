@@ -4,40 +4,89 @@ import { connect } from "react-redux";
 import actions from "../redux/bookmart/actions";
 import SearchField from "../components/SearchField";
 import BooksList from "../components/BooksList";
-import { strings } from "../constants/Messages";
-import { booksListData } from "../mockdata/BooksListData";
+import { strings, formData } from "../constants/Messages";
+import Modal from "react-responsive-modal";
+import Form from "../components/EditForm";
 import "./Books.css";
 
-const { getBooks } = actions;
+const { getBooks, searchBook } = actions;
 
 class Books extends Component {
+  state = {
+    isOpen: false,
+    isEdit: false,
+    editBook: { ...formData }
+  };
+
   componentDidMount() {
     const { getBooks } = this.props;
     getBooks();
   }
 
   handleSearch = (actionName, query) => {
+    const { searchBookByQuery } = this.props;
     switch (actionName) {
       case "search":
-        console.log("** query **", query);
+        searchBookByQuery(query);
         break;
-      case "add":
+      case "add": {
+        this.toggleModel();
+        this.setState({
+          isEdit: false,
+          editBook: { ...formData }
+        });
         break;
+      }
       default:
         break;
     }
   };
 
+  toggleModel = () => {
+    const { isOpen, editBook } = this.state;
+    const toggleFlag = !isOpen;
+
+    let bookToEdit = { ...formData };
+    if (toggleFlag) {
+      bookToEdit = { ...editBook };
+    }
+    this.setState({
+      isOpen: !isOpen,
+      editBook: bookToEdit
+    });
+  };
+
+  handleEdit = bookToUpdate => {
+    this.setState({
+      isOpen: true,
+      isEdit: true,
+      editBook: bookToUpdate
+    });
+  };
+
+  onSubmit = values => {
+    console.log("**** form values ****", values);
+  };
+
   render() {
-    const { books } = this.props;
+    const { books, filteredBooks, query } = this.props;
+    const { isOpen, isEdit, editBook } = this.state;
+
+    let booksData = books;
+    if (filteredBooks.length > 0 || query.length !== 0) {
+      booksData = filteredBooks;
+    }
     return (
       <div className="books-container">
         <div className="books-mainTitle">{strings.bookMart}</div>
         <SearchField onClickOfSearch={this.handleSearch} />
         <div className="books-divider" />
         <div className="books-list-container">
-          <BooksList data={books} />
+          <BooksList data={booksData} onEditClick={this.handleEdit} />
         </div>
+        <Modal open={isOpen} onClose={this.toggleModel} center>
+          <Form onSubmit={this.onSubmit} data={editBook} isEdit={isEdit} />
+        </Modal>
       </div>
     );
   }
@@ -45,22 +94,33 @@ class Books extends Component {
 
 const mapStateToProps = state => {
   const { booksState = {} } = state;
-  const { books = [] } = booksState;
-  return { books };
+  const { books = [], filteredBooks = [], searchString = "" } = booksState;
+  return { books, filteredBooks, query: searchString };
 };
 
 const mapDispatchToProps = dispatch => ({
   getBooks: () => {
     dispatch(getBooks());
+  },
+  searchBookByQuery: query => {
+    dispatch(searchBook(query));
   }
 });
 
 Books.propTypes = {
-  fetchGoals: PropTypes.func
+  getBooks: PropTypes.func,
+  searchBookByQuery: PropTypes.func,
+  filteredBooks: PropTypes.array,
+  books: PropTypes.array,
+  searchString: PropTypes.string
 };
 
 Books.defaultProps = {
-  updateBook: () => {}
+  getBooks: () => {},
+  searchBookByQuery: () => {},
+  books: [],
+  filteredBooks: [],
+  searchString: ""
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Books);

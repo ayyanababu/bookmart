@@ -12,11 +12,11 @@ export default function SearchField(props) {
       target: { value }
     } = event;
     setSearchString(value);
+    onClickOfSearch("search", value);
   };
 
   const handleSearch = (event, action) => {
     event.stopPropagation();
-
     onClickOfSearch(action, searchString);
   };
 

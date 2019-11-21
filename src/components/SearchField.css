@@ -7,7 +7,7 @@
 }
 
 .inputField {
-  width: 70%;
+  width: 60%;
   height: 40px;
   border-radius: 4px;
   border: 1px solid #d3d3d3;
@@ -15,9 +15,10 @@
   color: black;
   font-size: 16px;
   font-weight: normal;
+  margin: 0px 5px;
 }
 
-.search_button {
+.button {
   width: 100px;
   height: 40px;
   margin-left: 10px;
@@ -29,7 +30,20 @@
   padding: 2px;
 }
 
-.search_button_title {
+.button:hover {
+  cursor: pointer;
+  background-color: rgba(72, 104, 154, 0.3);
+}
+
+.search {
+  width: 80px;
+}
+
+.add {
+  width: 60px;
+}
+
+.button_title {
   color: white;
   font-size: 16px;
   font-weight: 500;

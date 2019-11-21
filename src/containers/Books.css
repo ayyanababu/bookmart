@@ -1,4 +1,4 @@
-.container {
+.books-container {
   display: flex;
   max-width: calc(100vw - 30%);
   background-color: #fff;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.booksTitle {
+.books-mainTitle {
   color: black;
   font-size: 22px;
   line-height: 18px;
@@ -20,8 +20,14 @@
   text-align: center;
 }
 
-.divider {
+.books-divider {
   border: 0.5px solid #d3d3d3;
   width: 98%;
   margin: 10px;
+}
+
+.books-list-container {
+  width: 100%;
+  margin-top: 16px;
+  overflow: auto;
 }

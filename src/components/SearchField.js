@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./SearchField.css";
+import { strings } from "../constants/Messages";
 
 export default function SearchField(props) {
   const { onClickOfSearch } = props;
@@ -13,8 +14,10 @@ export default function SearchField(props) {
     setSearchString(value);
   };
 
-  const handleSearch = () => {
-    onClickOfSearch(searchString);
+  const handleSearch = (event, action) => {
+    event.stopPropagation();
+
+    onClickOfSearch(action, searchString);
   };
 
   return (
@@ -24,10 +27,16 @@ export default function SearchField(props) {
         value={searchString}
         className="inputField"
         onChange={onChangeOfSearchQuery}
-        placeholder={"Type here to search a book..."}
+        placeholder={strings.searchPlaceHolder}
       />
-      <div onClick={handleSearch} className="search_button">
-        <span className="search_button_title">Search</span>
+      <div
+        onClick={event => handleSearch(event, "search")}
+        className="button search"
+      >
+        <span className="button_title">{strings.search}</span>
+      </div>
+      <div onClick={event => handleSearch(event, "add")} className="button add">
+        <span className="button_title">{strings.add}</span>
       </div>
     </div>
   );

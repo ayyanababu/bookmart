@@ -3,27 +3,41 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import actions from "../redux/bookmart/actions";
 import SearchField from "../components/SearchField";
-
+import BooksList from "../components/BooksList";
+import { strings } from "../constants/Messages";
+import { booksListData } from "../mockdata/BooksListData";
 import "./Books.css";
 
-const { updateBook } = actions;
+const { getBooks } = actions;
 
 class Books extends Component {
   componentDidMount() {
-    const { updateBook } = this.props;
-    updateBook();
+    const { getBooks } = this.props;
+    getBooks();
   }
 
-  handleSearch = query => {
-    console.log("** query **", query);
+  handleSearch = (actionName, query) => {
+    switch (actionName) {
+      case "search":
+        console.log("** query **", query);
+        break;
+      case "add":
+        break;
+      default:
+        break;
+    }
   };
 
   render() {
+    const { books } = this.props;
     return (
-      <div className="container">
-        <div className="booksTitle">Book Mart</div>
+      <div className="books-container">
+        <div className="books-mainTitle">{strings.bookMart}</div>
         <SearchField onClickOfSearch={this.handleSearch} />
-        <div className="divider" />
+        <div className="books-divider" />
+        <div className="books-list-container">
+          <BooksList data={books} />
+        </div>
       </div>
     );
   }
@@ -36,8 +50,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateBook: data => {
-    dispatch(updateBook({}));
+  getBooks: () => {
+    dispatch(getBooks());
   }
 });
 

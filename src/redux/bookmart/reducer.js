@@ -1,6 +1,6 @@
 import types from "./types";
 
-const { UPDATE_BOOK, UPDATE_FILTERED_BOOKS } = types;
+const { UPDATE_BOOK, UPDATE_FILTERED_BOOKS, GET_BOOKS_lIST_SUCCESS } = types;
 
 const initialState = {
   books: [],
@@ -19,6 +19,11 @@ const goalReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredBooks: payload
+      };
+    case GET_BOOKS_lIST_SUCCESS:
+      return {
+        ...state,
+        books: [...payload]
       };
     default:
       return state;
